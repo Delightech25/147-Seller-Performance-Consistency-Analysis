@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Add Seller Data Manually</h2>
+
+<div class="card shadow p-4">
+
+<form method="POST">
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Seller Name</label>
+<input name="seller" class="form-control mb-3" required>
+
+</div>
+
+<div class="col-md-6">
+
+<label>Month</label>
+<input name="month" class="form-control mb-3" placeholder="Jan / Feb / Mar" required>
+
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="col-md-4">
+
+<label>Total Orders</label>
+<input name="orders" type="number" class="form-control mb-3" required>
+
+</div>
+
+<div class="col-md-4">
+
+<label>On-time Deliveries</label>
+<input name="ontime" type="number" class="form-control mb-3" required>
+
+</div>
+
+<div class="col-md-4">
+
+<label>Rating (1–5)</label>
+<input name="rating" type="number" step="0.1" class="form-control mb-3" required>
+
+</div>
+
+</div>
+
+
+<div class="row">
+
+<div class="col-md-6">
+
+<label>Returns</label>
+<input name="returns" type="number" class="form-control mb-3">
+
+</div>
+
+<div class="col-md-6">
+
+<label>Cancellations</label>
+<input name="cancel" type="number" class="form-control mb-3">
+
+</div>
+
+</div>
+
+
+<button class="btn btn-success">
+Add Seller Data
+</button>
+
+</form>
+
+</div>
+
+{% endblock %}

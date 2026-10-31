@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Seller Analytics Dashboard</h2>
+
+<div class="row">
+
+<div class="col-md-6">
+<div class="card p-3 shadow">
+<h5>Seller Risk Score</h5>
+<canvas id="riskChart"></canvas>
+</div>
+</div>
+
+<div class="col-md-6">
+<div class="card p-3 shadow">
+<h5>Risk Distribution</h5>
+<canvas id="pieChart"></canvas>
+</div>
+</div>
+
+</div>
+
+
+<div class="row mt-4">
+
+<div class="col-md-12">
+<div class="card p-3 shadow">
+<h5>Seller Rating Trend</h5>
+<canvas id="lineChart"></canvas>
+</div>
+</div>
+
+</div>
+
+
+<!-- Suspicious Sellers Table -->
+
+<div class="card shadow mt-4 p-3">
+
+<h4>AI Detected Suspicious Sellers</h4>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Seller</th>
+<th>Month</th>
+<th>Orders</th>
+<th>Returns</th>
+<th>Cancel</th>
+<th>Rating</th>
+<th>Risk Score</th>
+
+</tr>
+
+{% for s in suspicious %}
+
+<tr class="table-danger">
+
+<td>{{s.seller}}</td>
+<td>{{s.month}}</td>
+<td>{{s.orders}}</td>
+<td>{{s.returns}}</td>
+<td>{{s.cancel}}</td>
+<td>{{s.rating}}</td>
+<td>{{s.risk_score}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+
+<script>
+
+var sellers={{sellers|safe}}
+var scores={{scores|safe}}
+var ratings={{ratings|safe}}
+var months={{months|safe}}
+
+
+// BAR CHART
+
+new Chart(document.getElementById("riskChart"),{
+
+type:"bar",
+
+data:{
+labels:sellers,
+datasets:[{
+label:"Risk Score",
+data:scores,
+backgroundColor:"#0d6efd"
+}]
+}
+
+})
+
+
+// PIE CHART
+
+new Chart(document.getElementById("pieChart"),{
+
+type:"pie",
+
+data:{
+labels:["Low Risk","Medium Risk","High Risk"],
+datasets:[{
+data:[
+scores.filter(x=>x<30).length,
+scores.filter(x=>x>=30 && x<60).length,
+scores.filter(x=>x>=60).length
+],
+backgroundColor:["green","orange","red"]
+}]
+}
+
+})
+
+
+// LINE CHART
+
+new Chart(document.getElementById("lineChart"),{
+
+type:"line",
+
+data:{
+labels:months,
+datasets:[{
+label:"Seller Rating",
+data:ratings,
+borderColor:"#0d6efd",
+fill:false,
+tension:0.4
+}]
+}
+
+})
+
+</script>
+
+{% endblock %}

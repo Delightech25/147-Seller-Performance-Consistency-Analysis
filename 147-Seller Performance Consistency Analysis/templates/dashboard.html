@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="mb-3">
+
+<a href="/generate" class="btn btn-primary">
+Generate Sample Data
+</a>
+
+<a href="/download" class="btn btn-success">
+Download Report
+</a>
+
+<a href="/clear" class="btn btn-danger">
+Clear Data
+</a>
+
+</div>
+
+<a href="/generate" class="btn btn-primary mb-4">
+Regenerate Sample Data
+</a>
+
+<a href="/clear" class="btn btn-danger"
+onclick="return confirm('Are you sure you want to delete all data?')">
+Clear Data
+</a>
+
+<div class="row">
+
+<div class="col-md-3">
+<div class="card shadow p-3">
+<h5>Total Sellers</h5>
+<h3>{{sellers}}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card shadow p-3">
+<h5>Average Rating</h5>
+<h3>{{rating}}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card shadow p-3">
+<h5>Total Orders</h5>
+<h3>{{orders}}</h3>
+</div>
+</div>
+
+<div class="col-md-3">
+<div class="card shadow p-3 bg-danger text-white">
+<h5>Suspicious Sellers</h5>
+<h3>{{suspicious}}</h3>
+</div>
+</div>
+
+</div>
+
+
+<!-- DATA TABLE -->
+
+<div class="card shadow mt-4 p-3">
+
+<h4>Generated Seller Data</h4>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Seller</th>
+<th>Month</th>
+<th>Orders</th>
+<th>On Time</th>
+<th>Returns</th>
+<th>Cancel</th>
+<th>Rating</th>
+
+</tr>
+
+{% for d in data %}
+
+<tr>
+
+<td>{{d.seller}}</td>
+<td>{{d.month}}</td>
+<td>{{d.orders}}</td>
+<td>{{d.ontime}}</td>
+<td>{{d.returns}}</td>
+<td>{{d.cancel}}</td>
+<td>{{d.rating}}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

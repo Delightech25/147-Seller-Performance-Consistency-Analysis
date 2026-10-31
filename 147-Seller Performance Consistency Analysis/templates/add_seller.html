@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h3>Add Seller Performance</h3>
+
+<form method="POST">
+
+<input name="seller" placeholder="Seller Name" class="form-control mb-2">
+
+<input name="month" placeholder="Month" class="form-control mb-2">
+
+<input name="total" placeholder="Total Orders" class="form-control mb-2">
+
+<input name="ontime" placeholder="On Time Orders" class="form-control mb-2">
+
+<input name="rating" placeholder="Rating" class="form-control mb-2">
+
+<input name="returns" placeholder="Returns" class="form-control mb-2">
+
+<input name="cancel" placeholder="Cancellations" class="form-control mb-2">
+
+<button class="btn btn-primary">Add</button>
+
+</form>
+
+{% endblock %}
